@@ -5,6 +5,10 @@ Writes one short funny rant (<=400 chars, no trailing newline) to
 /output/entry.txt: a neighbour, a leaf blower, and three leaves.
 """
 
+from pathlib import Path
+
+ENTRY_PATH = Path("/output/entry.txt")
+
 RANT = (
     "My neighbour fires up his leaf blower every Saturday at 7 a.m. "
     "to move three leaves from his driveway onto mine. Three leaves. "
@@ -13,12 +17,10 @@ RANT = (
 )
 
 
-def main():
-    import os
-
-    os.makedirs("/output", exist_ok=True)
+def main() -> None:
+    ENTRY_PATH.parent.mkdir(parents=True, exist_ok=True)
     # Exactly one rant, no trailing newline: the gate counts 1-400 chars.
-    with open("/output/entry.txt", "w", encoding="utf-8", newline="") as f:
+    with ENTRY_PATH.open("w", encoding="utf-8", newline="") as f:
         f.write(RANT)
 
 
